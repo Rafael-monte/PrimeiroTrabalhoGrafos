@@ -7,3 +7,8 @@ if __name__ == '__main__':
     grafo: Grafo = leitor.ler_arquivo_entrada()
     grafo.criar_matriz_adjacencias()
     vertices: list[Vertice] = grafo.buscar_vertices_adjacentes('b', printar=True)
+    grafo.remover_vertice(Vertice('b'))
+    grafo.criar_matriz_adjacencias()
+    grafo.remover_aresta(Vertice('a'), Vertice('c'))
+    print('Resultado apos remover o vertice (a, c)')
+    grafo.criar_matriz_adjacencias()

@@ -38,7 +38,9 @@ class Grafo:
         return vertice
 
     def __existe_relacao_entre_vertices(self, vertice_inicio: Vertice, vertice_fim: Vertice) -> bool:
-        filtro_relacao: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == vertice_inicio.get_valor() and aresta.get_fim_aresta().get_valor() == vertice_fim.get_valor(), self.__arestas)
+        filtro_relacao: filter = filter(lambda
+                                            aresta: aresta.get_inicio_aresta().get_valor() == vertice_inicio.get_valor() and aresta.get_fim_aresta().get_valor() == vertice_fim.get_valor(),
+                                        self.__arestas)
         return len(list(filtro_relacao)) > 0
 
     def aresta_pertence_ao_grafo(self, aresta: Aresta):
@@ -55,14 +57,41 @@ class Grafo:
         for aresta in self.__arestas:
             print(f'{aresta.get_inicio_aresta().get_valor()} {tipo_relacao} {aresta.get_fim_aresta().get_valor()}')
 
-    def buscar_vertices_adjacentes(self, valor_vertice: any, printar: bool=False) -> list[Vertice]:
-        filtro_arestas_com_vertice_no_inicio: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == valor_vertice, self.__arestas)
+    def remover_vertice(self, vertice: Vertice):
+        filtro_vertice: filter = filter(lambda _vertice: _vertice.get_valor() == vertice.get_valor(), self.__vertices)
+        lista_com_vertice_encontrado: list[Vertice] = list(filtro_vertice)
+        if len(lista_com_vertice_encontrado) == 0:
+            return
+        vertice_encontrado: Vertice = lista_com_vertice_encontrado[0]
+        self.__remover_arestas_relacionadas_com_vertice(vertice_encontrado)
+        self.__vertices.remove(vertice_encontrado)
+
+    def remover_aresta(self, inicio: Vertice, fim: Vertice):
+        arestas_que_serao_removidas: list[Aresta] = []
+        filtro_aresta: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == inicio.get_valor() and aresta.get_fim_aresta().get_valor() == fim.get_valor(), self.__arestas)
+        arestas_que_serao_removidas.extend(list(filtro_aresta))
+        if self.__tipo_grafo.value == TipoGrafo.NAO_DIRECIONADO.value:
+            filtro_inverso_aresta = filter(lambda aresta: aresta.get_fim_aresta().get_valor() == inicio.get_valor() and aresta.get_inicio_aresta().get_valor() == fim.get_valor(), self.__arestas)
+            arestas_que_serao_removidas.extend(list(filtro_inverso_aresta))
+        for aresta in arestas_que_serao_removidas:
+            self.__arestas.remove(aresta)
+
+    def __remover_arestas_relacionadas_com_vertice(self, vertice_encontrado):
+        arestas_relacionadas_com_vertice: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == vertice_encontrado.get_valor() or aresta.get_fim_aresta().get_valor() == vertice_encontrado.get_valor(), self.__arestas)
+        lista_arestas_relacionadas: list[Aresta] = list(arestas_relacionadas_com_vertice)
+        for aresta in lista_arestas_relacionadas:
+            self.__arestas.remove(aresta)
+
+    def buscar_vertices_adjacentes(self, valor_vertice: any, printar: bool = False) -> list[Vertice]:
+        filtro_arestas_com_vertice_no_inicio: filter = filter(
+            lambda aresta: aresta.get_inicio_aresta().get_valor() == valor_vertice, self.__arestas)
         lista_arestas: list[Aresta] = list(filtro_arestas_com_vertice_no_inicio)
         if len(lista_arestas) == 0:
             return []
         vertices: list[Vertice] = list(map(lambda aresta: aresta.get_fim_aresta(), lista_arestas))
         if printar:
-            print(f'Vertices adjacentes a "{valor_vertice}": [{", ".join(list(map(lambda vertice: vertice.get_valor(), vertices)))}]')
+            print(
+                f'Vertices adjacentes a "{valor_vertice}": [{", ".join(list(map(lambda vertice: vertice.get_valor(), vertices)))}]')
         return vertices
 
     def criar_matriz_adjacencias(self) -> None:
@@ -79,4 +108,3 @@ class Grafo:
     def __printar_matriz_adjacencias(self, matriz):
         for i in range(len(self.__vertices)):
             print(f'{self.__vertices[i].get_valor()} |{" ".join(str(matriz[i]))}|')
-
