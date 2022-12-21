@@ -55,6 +55,16 @@ class Grafo:
         for aresta in self.__arestas:
             print(f'{aresta.get_inicio_aresta().get_valor()} {tipo_relacao} {aresta.get_fim_aresta().get_valor()}')
 
+    def buscar_vertices_adjacentes(self, valor_vertice: any, printar: bool=False) -> list[Vertice]:
+        filtro_arestas_com_vertice_no_inicio: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == valor_vertice, self.__arestas)
+        lista_arestas: list[Aresta] = list(filtro_arestas_com_vertice_no_inicio)
+        if len(lista_arestas) == 0:
+            return []
+        vertices: list[Vertice] = list(map(lambda aresta: aresta.get_fim_aresta(), lista_arestas))
+        if printar:
+            print(f'Vertices adjacentes a "{valor_vertice}": [{", ".join(list(map(lambda vertice: vertice.get_valor(), vertices)))}]')
+        return vertices
+
     def criar_matriz_adjacencias(self) -> None:
         matriz: list[list[int]] = []
         for i in range(len(self.__vertices)):
