@@ -2,8 +2,11 @@ from classes.tipo_grafo import TipoGrafo
 from classes.aresta import Aresta
 from classes.tipo_aresta import TipoAresta
 from classes.vertice import Vertice
+from config import ALLOW_REFLEXIVE_RELATIONSHIP
 
 
+class Grafo:
+    pass
 class Grafo:
     __arestas: list[Aresta] = []
     __vertices: list[Vertice] = []
@@ -16,6 +19,21 @@ class Grafo:
         self.__vertices.append(Vertice(valor))
         # Ordena os vertices em ordem alfabetica
         self.__vertices.sort(key=lambda vertice: vertice.get_valor())
+
+    def get_arestas(self) -> list[Aresta]:
+        return self.__arestas
+
+    def get_vertices(self) -> list[Vertice]:
+        return self.__vertices
+
+    def set_vertices(self, vertices: list[Vertice]) -> None:
+        self.__vertices = vertices
+
+    def set_arestas(self, arestas: list[Aresta]) -> None:
+        self.__arestas = arestas
+
+    def get_arestas(self) -> list[Aresta]:
+        return self.__arestas
 
     def adicionar_aresta(self, inicio: Vertice, fim: Vertice, tipo_aresta: TipoAresta) -> None:
         self.__arestas.append(Aresta(inicio, fim, tipo_aresta))
@@ -62,16 +80,6 @@ class Grafo:
         self.__remover_arestas_relacionadas_com_vertice(vertice_encontrado)
         self.__vertices.remove(vertice_encontrado)
 
-    def remover_aresta(self, inicio: Vertice, fim: Vertice):
-        arestas_que_serao_removidas: list[Aresta] = []
-        filtro_aresta: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == inicio.get_valor() and aresta.get_fim_aresta().get_valor() == fim.get_valor(), self.__arestas)
-        arestas_que_serao_removidas.extend(list(filtro_aresta))
-        if self.__tipo_grafo.value == TipoGrafo.NAO_DIRECIONADO.value:
-            filtro_inverso_aresta = filter(lambda aresta: aresta.get_fim_aresta().get_valor() == inicio.get_valor() and aresta.get_inicio_aresta().get_valor() == fim.get_valor(), self.__arestas)
-            arestas_que_serao_removidas.extend(list(filtro_inverso_aresta))
-        for aresta in arestas_que_serao_removidas:
-            self.__arestas.remove(aresta)
-
     def buscar_vertices_incidentes(self, vertice: Vertice) -> list[Vertice]:
         filtro_arestas_com_o_vertice_no_fim: filter = filter(lambda aresta: aresta.get_fim_aresta().get_valor() == vertice.get_valor(), self.__arestas)
         return list(map(lambda aresta: aresta.get_inicio_aresta(), list(filtro_arestas_com_o_vertice_no_fim)))
@@ -104,6 +112,16 @@ class Grafo:
                 else:
                     matriz[i].append(0)
         self.__printar_matriz_adjacencias(matriz)
+
+    def remover_aresta(self, inicio: Vertice, fim: Vertice) -> None:
+        arestas_que_serao_removidas: list[Aresta] = []
+        filtro_aresta: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == inicio.get_valor() and aresta.get_fim_aresta().get_valor() == fim.get_valor(), self.__arestas)
+        arestas_que_serao_removidas.extend(list(filtro_aresta))
+        if self.__tipo_grafo.value == TipoGrafo.NAO_DIRECIONADO.value:
+            filtro_inverso_aresta = filter(lambda aresta: aresta.get_fim_aresta().get_valor() == inicio.get_valor() and aresta.get_inicio_aresta().get_valor() == fim.get_valor(), self.__arestas)
+            arestas_que_serao_removidas.extend(list(filtro_inverso_aresta))
+        for aresta in arestas_que_serao_removidas:
+            self.__arestas.remove(aresta)
 
     def __printar_matriz_adjacencias(self, matriz):
         for i in range(len(self.__vertices)):
