@@ -47,15 +47,11 @@ class Grafo:
         return self.__existe_relacao_entre_vertices(aresta.get_inicio_aresta(), aresta.get_fim_aresta())
 
     def mostrar_grafo(self):
-        print('Vertices')
         for vertice in self.__vertices:
-            print(vertice.get_valor())
-        print('Arestas')
-        tipo_relacao: str = '<->'
-        if self.get_tipo_grafo() == TipoGrafo.DIRECIONADO:
-            tipo_relacao = '->'
-        for aresta in self.__arestas:
-            print(f'{aresta.get_inicio_aresta().get_valor()} {tipo_relacao} {aresta.get_fim_aresta().get_valor()}')
+            filtro_arestas: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == vertice.get_valor(), self.__arestas)
+            lista_arestas: list[Aresta] = list(filtro_arestas)
+            lista_valores: list[any] = list(map(lambda aresta: aresta.get_fim_aresta().get_valor(), lista_arestas))
+            print(f'{vertice.get_valor()}: [{", ".join(lista_valores)}]')
 
     def remover_vertice(self, vertice: Vertice):
         filtro_vertice: filter = filter(lambda _vertice: _vertice.get_valor() == vertice.get_valor(), self.__vertices)
