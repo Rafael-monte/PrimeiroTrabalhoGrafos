@@ -72,6 +72,10 @@ class Grafo:
         for aresta in arestas_que_serao_removidas:
             self.__arestas.remove(aresta)
 
+    def buscar_vertices_incidentes(self, vertice: Vertice) -> list[Vertice]:
+        filtro_arestas_com_o_vertice_no_fim: filter = filter(lambda aresta: aresta.get_fim_aresta().get_valor() == vertice.get_valor(), self.__arestas)
+        return list(map(lambda aresta: aresta.get_inicio_aresta(), list(filtro_arestas_com_o_vertice_no_fim)))
+
     def __remover_arestas_relacionadas_com_vertice(self, vertice_encontrado):
         arestas_relacionadas_com_vertice: filter = filter(lambda aresta: aresta.get_inicio_aresta().get_valor() == vertice_encontrado.get_valor() or aresta.get_fim_aresta().get_valor() == vertice_encontrado.get_valor(), self.__arestas)
         lista_arestas_relacionadas: list[Aresta] = list(arestas_relacionadas_com_vertice)
