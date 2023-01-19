@@ -10,5 +10,5 @@ Implementação do primeiro trabalho de grafos em python
 6. Desenvolver uma função que devolve todos os vértices adjacentes a um vértice. [:heavy_check_mark:]
 7. Desenvolver uma função que devolve todos os vértices que são incidentes em um vértice. [:heavy_check_mark:]
 8. Desenvolver uma função que devolve o grafo complemento. [:heavy_check_mark:]
-9. Desenvolver uma função que devolve o grafo transposto (grafo formado pela inversão de todas as arestas). [:x:]
+9. Desenvolver uma função que devolve o grafo transposto (grafo formado pela inversão de todas as arestas). [:heavy_check_mark:]
 10. Para cada item acima, deixe na forma de comentário qual a complexidade de tempo das funções que você desenvolveu. [:x:]
