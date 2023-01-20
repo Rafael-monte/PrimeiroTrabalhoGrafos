@@ -1,5 +1,6 @@
 from classes.grafo import Grafo
 from classes.tipo_grafo import TipoGrafo
+from classes.aresta import Aresta
 from classes.vertice import Vertice
 from classes.tipo_aresta import TipoAresta
 
