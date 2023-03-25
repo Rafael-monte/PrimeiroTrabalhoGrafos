@@ -1,12 +1,12 @@
-from classes.criador_grafo_complemento import CriadorGrafoComplemento
+from classes.criador_grafo_transposto import CriadorGrafoTransposto
 from classes.grafo import Grafo
+from classes.vertice import Vertice
+from classes.aresta import Aresta
+from classes.tipo_aresta import TipoAresta
 from classes.leitor_arquivo import LeitorArquivo
+# autores: Rafael Monteiro Zancanaro & Robson Oliveira de Souza
 
 if __name__ == '__main__':
     leitor: LeitorArquivo = LeitorArquivo()
     grafo: Grafo = leitor.ler_arquivo_entrada()
-    grafo.criar_matriz_adjacencias()
-    print('----------------------------------------------------')
-    grafo_complemento: Grafo = CriadorGrafoComplemento.criar_grafo_complemento_a_partir_de_grafo(grafo)
-    #grafo_complemento.mostrar_grafo()
-    grafo_complemento.criar_matriz_adjacencias()
+    #grafo_complemento: Grafo = CriadorGrafoTransposto.criar_grafo_transposto_a_partir_de_grafo(grafo)

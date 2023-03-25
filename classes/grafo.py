@@ -35,10 +35,10 @@ class Grafo:
     def get_arestas(self) -> list[Aresta]:
         return self.__arestas
 
-    def adicionar_aresta(self, inicio: Vertice, fim: Vertice, tipo_aresta: TipoAresta) -> None:
-        self.__arestas.append(Aresta(inicio, fim, tipo_aresta))
+    def adicionar_aresta(self, inicio: Vertice, fim: Vertice, tipo_aresta: TipoAresta, peso: int = 0) -> None:
+        self.__arestas.append(Aresta(inicio, fim, tipo_aresta, peso))
         if self.__tipo_grafo.value == TipoGrafo.NAO_DIRECIONADO.value:
-            self.__arestas.append(Aresta(fim, inicio, tipo_aresta))
+            self.__arestas.append(Aresta(fim, inicio, tipo_aresta, peso))
 
     def __procurar_vertice_no_grafo(self, valor_vertice: any) -> list[Vertice]:
         filtro_vertices: filter = filter(lambda vertice: vertice.get_valor() == valor_vertice, self.__vertices)
