@@ -5,10 +5,11 @@ from classes.aresta import Aresta
 from classes.tipo_aresta import TipoAresta
 from classes.leitor_arquivo import LeitorArquivo
 from arvores_geradoras_minimas.algoritmo_prim import arvore_geradora_minima_prim
+from caminhos_minimos.dijkstra import dijkstra
 # autores: Rafael Monteiro Zancanaro & Robson Oliveira de Souza
 
 if __name__ == '__main__':
     leitor: LeitorArquivo = LeitorArquivo()
     grafo: Grafo = leitor.ler_arquivo_entrada()
-    vertices: list[Vertice] = arvore_geradora_minima_prim(grafo, grafo.get_vertice('a'))
-    [print(f'{vertice.get_valor()}') for vertice in vertices]
+    lista_djikstra = dijkstra(grafo, grafo.get_vertice('a'))
+    print(f"{list(map(lambda vtx: vtx.get_valor(), lista_djikstra))}")
