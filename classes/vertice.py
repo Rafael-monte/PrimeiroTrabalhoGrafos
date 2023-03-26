@@ -28,16 +28,19 @@ class Vertice:
     def set_antecessor(self, vertice: Vertice) -> None:
         self.__antecessor = vertice
 
-    def __eq__(self, other: Vertice) -> bool:
+    def __eq__(self, other) -> bool:
         NOT_EQUAL, EQUAL = False, True
 
-        if self.__distancia != other.__distancia:
+        if self is None and other is None:
+            return EQUAL
+
+        if self.__distancia != other.get_distancia():
             return NOT_EQUAL
 
-        if self.__antecessor != other.__antecessor:
+        if self.__antecessor != other.get_antecessor():
             return NOT_EQUAL
 
-        if self.__valor != other.__valor:
+        if self.__valor != other.get_valor():
             return NOT_EQUAL
 
         return EQUAL

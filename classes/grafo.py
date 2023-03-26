@@ -92,7 +92,7 @@ class Grafo:
 
     def buscar_vertices_adjacentes(self, valor_vertice: any, printar: bool = False) -> list[Vertice]:
         filtro_arestas_com_vertice_no_inicio: filter = filter(
-            lambda aresta: aresta.get_inicio_aresta().get_valor() == valor_vertice, self.__arestas)
+            lambda aresta: aresta.get_inicio_aresta().get_valor() == valor_vertice.get_valor(), self.__arestas)
         lista_arestas: list[Aresta] = list(filtro_arestas_com_vertice_no_inicio)
         if len(lista_arestas) == 0:
             return []
@@ -112,6 +112,10 @@ class Grafo:
                 else:
                     matriz[i].append(0)
         self.__printar_matriz_adjacencias(matriz)
+
+    def buscar_aresta(self, inicio: Vertice, fim: Vertice) -> Aresta:
+        aresta = filter(lambda a: a.get_inicio_aresta() == inicio and a.get_fim_aresta() == fim, self.__arestas)
+        return list(aresta)[0]
 
     def remover_aresta(self, inicio: Vertice, fim: Vertice) -> None:
         arestas_que_serao_removidas: list[Aresta] = []
