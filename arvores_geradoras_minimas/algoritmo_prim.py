@@ -5,7 +5,6 @@ from classes.vertice import Vertice
 from funcoes_auxiliares.initialize_single_source import initialize_single_source
 from funcoes_auxiliares.extract_min import extract_min
 from funcoes_auxiliares.create_min_tree import create_min_tree
-from utils.copy_graph import copy_graph
 
 
 def prim(grafo: Grafo, vertice_inicial: Vertice) -> dict[str, list[str]]:
