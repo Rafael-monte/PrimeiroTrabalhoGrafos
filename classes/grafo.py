@@ -135,3 +135,10 @@ class Grafo:
         dicionario = {}
         dicionario[vtx_value] = filter_map_and_list(lambda a: a.get_inicio_aresta().get_valor() == vtx_value, lambda a: (a.get_fim_aresta(), a.get_peso_aresta()), self.__arestas)
         return dicionario
+    
+    def get_arestas_as_dict(self):
+        arestas_as_dict = {}
+        for vtx in self.__vertices:
+            adjacentes = self.get_adjacentes_as_dict(vtx.get_valor())[vtx.get_valor()]
+            arestas_as_dict[vtx.get_valor()] = [(vtx_adj.get_valor(), peso) for vtx_adj, peso in adjacentes]
+        return arestas_as_dict
