@@ -31,6 +31,5 @@ def prim(grafo: Grafo, vertice_inicial: Vertice):
             # Se o vertice não foi visitado, é colocado na heap
             if vertice_adj.get_valor() not in visitados:
                 heapq.heappush(arestas, (peso_aresta_adj, vertice_adj.get_valor()))
-
-        # # Return the visited set
+    
     return arvore_geradora_minima

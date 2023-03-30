@@ -1,18 +1,26 @@
 from classes.grafo import Grafo
 
 def kruskal(graph: Grafo):
-    mst = []
-    sets = {node.get_valor(): set([node.get_valor()]) for node in graph.get_vertices()}
+    arvore_minima = []
+    # Cria um dicionário com os vértices e seus respectivos valores
+    sets = {vtx.get_valor(): set([vtx.get_valor()]) for vtx in graph.get_vertices()}
 
-    edges = [(peso, u.get_valor(), v.get_valor()) for u in graph.get_vertices() for v, peso in graph.get_adjacentes_as_dict(u.get_valor())[u.get_valor()]]
-    edges.sort()
+    arestas_as_tuple = []
 
-    for peso, u, v in edges:
-        set_u = sets[u]
-        set_v = sets[v]
-        if set_u != set_v:
-            mst.append((u, v, peso))
-            set_u.update(set_v)
-            for node in set_v:
-                sets[node] = set_u
-    return mst
+    # Converte as classes de aresta para um tipo mais flexível (no caso uma tupla de (int, str str))
+    for u_vtx in graph.get_vertices():
+        for v_vtx, weight in graph.get_adjacentes_as_dict(u_vtx.get_valor())[u_vtx.get_valor()]:
+            arestas_as_tuple.append((weight, u_vtx.get_valor(), v_vtx.get_valor()))
+    
+    # Ordena as arestas pelo peso
+    arestas_as_tuple.sort()
+
+    for peso, u, v in arestas_as_tuple:
+        set_vtx_u = sets[u]
+        set_vtx_v = sets[v]
+        if set_vtx_u != set_vtx_v:
+            arvore_minima.append((u, v, peso))
+            set_vtx_u.update(set_vtx_v)
+            for vtx_value in set_vtx_v:
+                sets[vtx_value] = set_vtx_u
+    return arvore_minima
