@@ -3,7 +3,7 @@ from classes.aresta import Aresta
 from classes.tipo_aresta import TipoAresta
 from classes.vertice import Vertice
 from config import ALLOW_REFLEXIVE_RELATIONSHIP
-
+from utils.iterators import filter_map_and_list
 
 class Grafo:
     pass
@@ -130,3 +130,8 @@ class Grafo:
     def __printar_matriz_adjacencias(self, matriz):
         for i in range(len(self.__vertices)):
             print(f'{self.__vertices[i].get_valor()} |{" ".join(str(matriz[i]))}|')
+
+    def get_adjacentes_as_dict(self, vtx_value: any) -> dict[any, int]:
+        dicionario = {}
+        dicionario[vtx_value] = filter_map_and_list(lambda a: a.get_inicio_aresta().get_valor() == vtx_value, lambda a: (a.get_fim_aresta(), a.get_peso_aresta()), self.__arestas)
+        return dicionario
