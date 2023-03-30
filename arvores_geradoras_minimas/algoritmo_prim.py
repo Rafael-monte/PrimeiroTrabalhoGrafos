@@ -3,33 +3,34 @@ import heapq
 from classes.grafo import Grafo
 from classes.vertice import Vertice
 from funcoes_auxiliares.initialize_single_source import initialize_single_source
-from funcoes_auxiliares.extract_min import extract_min
-from funcoes_auxiliares.create_min_tree import create_min_tree
 
 
-def prim(grafo: Grafo, vertice_inicial: Vertice) -> dict[str, list[str]]:
+def prim(grafo: Grafo, vertice_inicial: Vertice):
     initialize_single_source(grafo, vertice_inicial)
-    vertices_grafo = grafo.get_vertices()[:]
     arestas = [(0, vertice_inicial.get_valor())]
-    mst = {}
-    visited = set()
+    arvore_geradora_minima = {}
+    visitados = set()
     heapq.heapify(arestas)
     while arestas:
-        # Get the node with the minimum weight from the priority queue
-        weight, node = heapq.heappop(arestas)
-        # If the node has already been visited, continue to the next iteration
-        if node in visited:
+        # Tira o vertice com menor distancia da heap
+        peso_aresta, valor_vertice = heapq.heappop(arestas)
+        # Se o vertice já tiver sido visitado, pula a iteração
+        if valor_vertice in visitados:
             continue
 
-        # Mark the node as visited
-        visited.add(node)
-        if node != vertice_inicial.get_valor():
-            mst[node] = weight
-        # # Process the adjacent nodes
-        for adj_node, adj_weight in grafo.get_adjacentes_as_dict(node)[node]:
-            # If the adjacent node has not been visited yet, add it to the priority queue
-            if adj_node.get_valor() not in visited:
-                heapq.heappush(arestas, (adj_weight, adj_node.get_valor()))
+        # Coloca o vertice na lista de visitados
+        visitados.add(valor_vertice)
+
+        # Se o valor do vertice é diferente do valor do vertice inicial, adiciona uma nova entrada no dicionário que será a mst
+        if valor_vertice != vertice_inicial.get_valor():
+            # O formato do vertice representa => {folha que está conectada: peso da aresta que liga ele com o vertice anterior}
+            arvore_geradora_minima[valor_vertice] = peso_aresta
+        
+        # Pega os vertices adjacentes e o peso das arestas que ligam o vertice sendo processado a elas
+        for vertice_adj, peso_aresta_adj in grafo.get_adjacentes_as_dict(valor_vertice)[valor_vertice]:
+            # Se o vertice não foi visitado, é colocado na heap
+            if vertice_adj.get_valor() not in visitados:
+                heapq.heappush(arestas, (peso_aresta_adj, vertice_adj.get_valor()))
 
         # # Return the visited set
-    return mst
+    return arvore_geradora_minima

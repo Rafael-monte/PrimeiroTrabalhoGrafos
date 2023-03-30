@@ -5,7 +5,9 @@ from config import INPUT_FILE_LOCATION
 from classes.vertice import Vertice
 from classes.aresta import Aresta
 from classes.tipo_aresta import TipoAresta
-class MyTestCase(unittest.TestCase):
+
+
+class NovaEstruturaTest(unittest.TestCase):
     reader: LeitorArquivo
     grafo: Grafo
     arestas_com_peso: list[Aresta]
@@ -13,7 +15,7 @@ class MyTestCase(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.reader = LeitorArquivo()
         # Colocar como argumento o caminho absoluto do arquivo de grafo
-        cls.grafo: Grafo = cls.reader.ler_arquivo_entrada()
+        cls.grafo: Grafo = cls.reader.ler_arquivo_entrada('/home/user/grafos/PrimeiroTrabalhoGrafos/input/grafo.txt')
         cls.arestas_com_peso = [
             Aresta(Vertice('a'), Vertice('b'), TipoAresta.NAO_DIRECIONADO, 9),
             Aresta(Vertice('a'), Vertice('d'), TipoAresta.NAO_DIRECIONADO, 1),

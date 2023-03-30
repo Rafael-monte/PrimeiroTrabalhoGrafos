@@ -18,5 +18,5 @@ if __name__ == '__main__':
     # print(f"{list(map(lambda vtx: vtx.get_valor(), lista_djikstra))}")
     # resultado_bellman_ford = bellman_ford(grafo, grafo.get_vertice('a'))
     # print(f"{resultado_bellman_ford}")
-    # print(prim(grafo, grafo.get_vertice('a')))
-    print(kruskal(grafo))
+    print(prim(grafo, grafo.get_vertice('a')))
+    #print(kruskal(grafo))

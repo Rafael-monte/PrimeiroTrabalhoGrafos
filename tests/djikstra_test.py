@@ -1,12 +1,11 @@
 import unittest
-
 from classes.grafo import Grafo
 from classes.leitor_arquivo import LeitorArquivo
 from caminhos_minimos.dijkstra import dijkstra
 from utils.iterators import map_and_list
 
 
-class MyTestCase(unittest.TestCase):
+class DjikstraTest(unittest.TestCase):
     reader: LeitorArquivo
     caminho_minimo_partindo_de_d = list[str]
     caminho_minimo_partindo_de_c = list[str]
@@ -17,7 +16,7 @@ class MyTestCase(unittest.TestCase):
         cls.reader = LeitorArquivo()
         cls.caminho_minimo_partindo_de_d = ['d', 'a', 'e', 'b', 'f', 'c']
         cls.caminho_minimo_partindo_de_c = ['c', 'b', 'f', 'e', 'a', 'd']
-        cls.caminho_arquivo_grafo = '/home/rafael/Downloads/trabalho-grafos/Trabalho_1_Rafael_Robson/PrimeiroTrabalhoGrafos/input/grafo.txt'
+        cls.caminho_arquivo_grafo = '/home/user/grafos/PrimeiroTrabalhoGrafos/input/grafo.txt'
 
     # Fazer um teste de cada vez
 
