@@ -9,6 +9,7 @@ from caminhos_minimos.dijkstra import dijkstra
 from caminhos_minimos.bellman_ford import bellman_ford
 from funcoes_auxiliares.create_min_tree import create_min_tree
 from arvores_geradoras_minimas.kruskal import kruskal
+from caminhos_minimos.floyd_warshal import floyd_warshall
 # autores: Rafael Monteiro Zancanaro & Robson Oliveira de Souza
 
 if __name__ == '__main__':
@@ -19,4 +20,6 @@ if __name__ == '__main__':
     # resultado_bellman_ford = bellman_ford(grafo, grafo.get_vertice('a'))
     # print(f"{resultado_bellman_ford}")
     # print(prim(grafo, grafo.get_vertice('a')))
-    print(kruskal(grafo))
+
+    print(grafo.get_vertices())
+    floyd_warshall(grafo)

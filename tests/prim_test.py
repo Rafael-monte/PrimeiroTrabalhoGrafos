@@ -18,7 +18,7 @@ class PrimTest(unittest.TestCase):
         cls.arvore_minima_partindo_de_a = {'d': 1, 'e': 3, 'b': 7, 'c': 2, 'f': 4};
         cls.arvore_minima_partindo_de_f = {'c': 4, 'b': 2, 'e': 7, 'd': 3, 'a': 1};
         cls.arvore_minima_partindo_de_e = {'d': 3, 'a': 1, 'b': 7, 'c': 2, 'f': 4};
-        cls.caminho_arquivo_grafo = '/home/user/grafos/PrimeiroTrabalhoGrafos/input/grafo.txt'
+        cls.caminho_arquivo_grafo = '/home/rafael/Downloads/trabalho-grafos/Trabalho_1_Rafael_Robson/PrimeiroTrabalhoGrafos/input/grafo.txt'
 
 
     def test_ao_informar_vertice_inicial_a_trazer_menor_arvore(self):
