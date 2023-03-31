@@ -16,7 +16,7 @@ class DjikstraTest(unittest.TestCase):
         cls.reader = LeitorArquivo()
         cls.caminho_minimo_partindo_de_d = ['d', 'a', 'e', 'b', 'f', 'c']
         cls.caminho_minimo_partindo_de_c = ['c', 'b', 'f', 'e', 'a', 'd']
-        cls.caminho_arquivo_grafo = '/home/user/grafos/PrimeiroTrabalhoGrafos/input/grafo.txt'
+        cls.caminho_arquivo_grafo = '/home/rafael/Downloads/trabalho-grafos/Trabalho_1_Rafael_Robson/PrimeiroTrabalhoGrafos/input/grafo.txt'
 
     # Fazer um teste de cada vez
 

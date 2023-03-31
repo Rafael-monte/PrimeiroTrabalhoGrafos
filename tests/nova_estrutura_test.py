@@ -15,7 +15,7 @@ class NovaEstruturaTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.reader = LeitorArquivo()
         # Colocar como argumento o caminho absoluto do arquivo de grafo
-        cls.grafo: Grafo = cls.reader.ler_arquivo_entrada('/home/user/grafos/PrimeiroTrabalhoGrafos/input/grafo.txt')
+        cls.grafo: Grafo = cls.reader.ler_arquivo_entrada('/home/rafael/Downloads/trabalho-grafos/Trabalho_1_Rafael_Robson/PrimeiroTrabalhoGrafos/input/grafo.txt')
         cls.arestas_com_peso = [
             Aresta(Vertice('a'), Vertice('b'), TipoAresta.NAO_DIRECIONADO, 9),
             Aresta(Vertice('a'), Vertice('d'), TipoAresta.NAO_DIRECIONADO, 1),

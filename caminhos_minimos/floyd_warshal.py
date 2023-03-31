@@ -10,13 +10,16 @@ def floyd_warshall(graph: Grafo):
     # Coloca 0 na diagonal principal
     for i in range(n):
         matriz[i][i] = 0
-    
-    for vertex in graph.get_vertices():
-        i = vertex_map[vertex.get_valor()]
-        for neighbor, weight in graph.get_adjacentes_as_dict(vertex.get_valor())[vertex.get_valor()]:
-            j = vertex_map[neighbor.get_valor()]
-            matriz[i][j] = weight
-    
+
+    row, col = 0, 0
+    valores_vertices = list(map(lambda x: x.get_valor(), graph.get_vertices()))
+    valores_vertices.sort()
+    for vertex in valores_vertices:
+        for neighbor, weight in graph.get_adjacentes_as_dict(vertex)[vertex]:
+            matriz[row][col] = weight
+            col += 1
+        row += 1
+        col = 0
     
     for k in range(n):
         for i in range(n):
