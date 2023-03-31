@@ -20,4 +20,6 @@ if __name__ == '__main__':
     # resultado_bellman_ford = bellman_ford(grafo, grafo.get_vertice('a'))
     # print(f"{resultado_bellman_ford}")
     # print(prim(grafo, grafo.get_vertice('a')))
-    print(floyd_warshall(grafo))
+
+    print(grafo.get_vertices())
+    floyd_warshall(grafo)
